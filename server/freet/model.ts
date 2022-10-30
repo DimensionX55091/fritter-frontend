@@ -1,4 +1,4 @@
-import type {Types} from 'mongoose';
+import type {Types, PopulatedDoc, Document} from 'mongoose';
 import {Schema, model} from 'mongoose';
 import type {User} from '../user/model';
 
@@ -14,6 +14,9 @@ export type Freet = {
   dateCreated: Date;
   content: string;
   dateModified: Date;
+  numReport: number;
+  warningThreshold: number;
+  warning: boolean;
 };
 
 export type PopulatedFreet = {
@@ -22,6 +25,9 @@ export type PopulatedFreet = {
   dateCreated: Date;
   content: string;
   dateModified: Date;
+  numReport: number;
+  warningThreshold: number;
+  warning: boolean;
 };
 
 // Mongoose schema definition for interfacing with a MongoDB table
@@ -48,6 +54,21 @@ const FreetSchema = new Schema<Freet>({
   // The date the freet was modified
   dateModified: {
     type: Date,
+    required: true
+  },
+  // The number of reports on the freet
+  numReport: {
+    type: Number,
+    required: true
+  },
+  // The threshold for the warning to appear
+  warningThreshold: {
+    type: Number,
+    required: true
+  },
+  // Whether the warning sign appears
+  warning: {
+    type: Boolean,
     required: true
   }
 });
