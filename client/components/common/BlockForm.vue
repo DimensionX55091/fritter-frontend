@@ -11,7 +11,10 @@
         v-for="field in fields"
         :key="field.id"
       >
-        <label :for="field.id">{{ field.label }}:</label>
+        <label 
+          v-if="field.hidden === false"
+          :for="field.id">{{ field.label }}:
+        </label>
         <textarea
           v-if="field.id === 'content'"
           :name="field.id"
@@ -19,12 +22,19 @@
           @input="field.value = $event.target.value"
         />
         <input
-          v-else
+          v-else-if="field.hidden !== true"
           :type="field.id === 'password' ? 'password' : 'text'"
           :name="field.id"
           :value="field.value"
           @input="field.value = $event.target.value"
         >
+        <!-- <input
+          v-else
+          :type="field.id === 'password' ? 'password' : 'text'"
+          :name="field.id"
+          :value="field.value"
+          @input="field.value = $event.target.value"
+        > -->
       </div>
     </article>
     <article v-else>

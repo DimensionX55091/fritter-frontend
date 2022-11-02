@@ -11,6 +11,7 @@ const routes = [
   {path: '/', name: 'Home', component: FreetsPage},
   {path: '/account', name: 'Account', component: AccountPage},
   {path: '/login', name: 'Login', component: LoginPage},
+  {path: '/logout', name: 'Logout', component: FreetsPage},
   {path: '*', name: 'Not Found', component: NotFound}
 ];
 

@@ -4,28 +4,36 @@
 
 <template>
   <nav>
-    <div class="left">
+    <div class="icon">
       <img src="../../public/logo.svg">
       <h1 class="title">
         Fritter
       </h1>
     </div>
-    <div class="right">
-      <router-link to="/">
+    <div class="top">
+      <h2><router-link to="/">
         Home
-      </router-link>
-      <router-link
+      </router-link></h2>
+      <h2><router-link
         v-if="$store.state.username"
         to="/account"
       >
-        Account
+        Setting
       </router-link>
       <router-link
         v-else
         to="/login"
       >
         Login
-      </router-link>
+      </router-link></h2>
+    </div>
+    <div class="bottom">
+      <h2><router-link 
+        v-if="$store.state.username"
+        to="/logout"
+      >
+        Log Out
+      </router-link></h2>
     </div>
     <section class="alerts">
       <article
@@ -41,12 +49,32 @@
 
 <style scoped>
 nav {
-    padding: 1vw 2vw;
+    /* padding: 1vw 2vw;
     background-color: #ccc;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
+    position: relative; */
+
+  /* padding: 8px 8px 8px 32px;
+  background-color: #ccc;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s; */
+
+  height: 100%; /* 100% Full-height */
+  width: 15%; /* 15% width */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #ccc; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 30px; /* Place content 60px from the top */
+  padding-left: 2%;
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
 
 .title {
@@ -58,21 +86,33 @@ img {
     height: 32px;
 }
 
-.left {
-	display: flex;
+.icon {
+	display: block;
 	align-items: center;
 }
 
-.right {
-    font-size: 20px;
-    display: grid;
-    gap: 16px;
-    grid-auto-flow: column;
-    align-items: center;
+.top {
+  font-size: 20px;
+  /* display: grid; */
+  height: 5;
+  /* gap: 0px;
+  grid-auto-flow: row;
+  align-items: top; */
+  
+  position: absolute;
+  /* top: 0; */
 }
 
-.right a {
-    margin-left: 5px;
+.bottom {
+  font-size: 20px;
+  /* display: grid; */
+  height: 100;
+  /* gap: 0px; */
+  /* grid-auto-flow: row; */
+  /* align-items: bottom; */
+  /* vertical-align: bottom; */
+  position: absolute;
+  bottom: 0;
 }
 
 .alerts {

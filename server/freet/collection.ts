@@ -27,7 +27,7 @@ class FreetCollection {
       content,
       dateModified: date,
       numReport: 0,
-      warningThershold: 0,
+      warningThreshold: 0,
       warning: false
     });
     await freet.save(); // Saves freet to MongoDB

@@ -44,6 +44,7 @@ body {
 
 main {
   padding: 0 5em 5em;
+  padding-left: 20%;
 }
 
 .alerts {

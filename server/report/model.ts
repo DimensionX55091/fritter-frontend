@@ -3,7 +3,7 @@ import {Schema, model} from 'mongoose';
 import type {User} from '../user/model';
 import type {Freet} from '../freet/model'
 import {Reason} from './util'
-import FreetCollection from 'freet/collection';
+import FreetCollection from '../freet/collection';
 import FreetModel from '../freet/model';
 
 export type Report = {
