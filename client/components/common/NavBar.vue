@@ -30,7 +30,7 @@
     <div class="bottom">
       <h2><router-link 
         v-if="$store.state.username"
-        to="/logout"
+        to="/home"
       >
         Log Out
       </router-link></h2>
