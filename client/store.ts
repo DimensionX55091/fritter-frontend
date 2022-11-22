@@ -52,7 +52,17 @@ const store = new Vuex.Store({
       const url = state.filter ? `/api/users/${state.filter}/freets` : '/api/freets';
       const res = await fetch(url).then(async r => r.json());
       state.freets = res;
-    }
+    },
+    // async logOut(state) {
+    //   state.username = null;
+    //   state.alerts = {
+    //     message: 'You are now signed out!', status: 'success'
+    //   };
+    //   // this.$router.push({name: 'Home'}); // Goes to Home page after signing out
+    //   // this.$store.commit('alert', {
+    //   //   message: 'You are now signed out!', status: 'success'
+    //   // });
+    // }
   },
   // Store data across page refreshes, only discard on browser close
   plugins: [createPersistedState()]

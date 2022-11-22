@@ -10,6 +10,29 @@
         @{{ freet.author }}
       </h3>
       <div
+        v-if="$store.state.username !== freet.author"
+        class="actions"
+      >
+        <button
+          v-if="reporting"
+          @click="submitReport"
+        >
+          ✅ Submit Report
+        </button>
+        <button
+          v-if="reporting"
+          @click="stopReporting"
+        >
+          🚫 Discard report
+        </button>
+        <button
+          v-if="!reporting"
+          @click="startReporting"
+        >
+          ⚠ Report
+        </button>
+      </div>
+      <div
         v-if="$store.state.username === freet.author"
         class="actions"
       >
@@ -41,6 +64,12 @@
       class="content"
       :value="draft"
       @input="draft = $event.target.value"
+    />
+    <textarea
+      v-if="reporting"
+      class="reason"
+      :value="draftReport"
+      @input="draftReport = $event.target.value"
     />
     <p
       v-else
@@ -77,7 +106,9 @@ export default {
   data() {
     return {
       editing: false, // Whether or not this freet is in edit mode
+      reporting: false, // Whether or not this freet is being reported
       draft: this.freet.content, // Potentially-new content for this freet
+      draftReport: '',
       alerts: {} // Displays success/error messages encountered during freet modification
     };
   },
@@ -108,7 +139,7 @@ export default {
           });
         }
       };
-      this.request(params);
+      this.requestEditFreet(params);
     },
     submitEdit() {
       /**
@@ -132,7 +163,37 @@ export default {
       };
       this.request(params);
     },
-    async request(params) {
+    startReporting() {
+      this.reporting = true;
+      this.draftReport = '';
+    },
+    stopReporting() {
+      this.reporting = false;
+      this.draft = '';
+    },
+    submitReport() {
+      /**
+       * Updates freet to have the submitted draft content.
+       */
+      if (!this.draftReport) {
+        const error = 'Error: Must file a reason for the report.';
+        this.$set(this.alerts, error, 'error'); // Set an alert to be the error text, timeout of 3000 ms
+        setTimeout(() => this.$delete(this.alerts, error), 3000);
+        return;
+      }
+
+      const params = {
+        method: 'POST',
+        message: 'Successfully report this freet!',
+        body: JSON.stringify({content: this.draft}),
+        callback: () => {
+          this.$set(this.alerts, params.message, 'success');
+          setTimeout(() => this.$delete(this.alerts, params.message), 3000);
+        }
+      };
+      this.requestReport(params);
+    },
+    async requestEditFreet(params) {
       /**
        * Submits a request to the freet's endpoint
        * @param params - Options for the request
