@@ -12,7 +12,7 @@ export default {
       method: 'PUT',
       hasBody: true,
       fields: [
-        {id: 'followedUsername', label: 'FollowedUsername', value: ''}
+        {id: 'followedUsername', label: 'Username', value: '', hidden: false}
       ],
       title: 'Follow a user',
       callback: () => {

@@ -167,7 +167,7 @@ export default {
           setTimeout(() => this.$delete(this.alerts, params.message), 3000);
         }
       };
-      this.request(params);
+      this.requestEditFreet(params);
     },
     startReporting() {
       this.reporting = true;
