@@ -28,9 +28,10 @@
       </router-link></h2>
     </div>
     <div class="bottom">
-      <h2><a href 
+      <h2><a 
         v-if="$store.state.username"
         @click="logOut"
+        href="#"
       >
         Log Out
       </a></h2>
@@ -65,7 +66,7 @@ export default {
           throw new Error(res.error);
         }
         this.$store.commit('setUsername', null);
-        this.$router.push({name: 'Login'});
+        this.$router.push({name: 'Home'});
         this.$store.commit('alert', {
           message: 'You are now signed out!', status: 'success'
         });
