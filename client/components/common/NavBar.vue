@@ -102,7 +102,7 @@ nav {
   z-index: 1; /* Stay on top */
   top: 0; /* Stay at the top */
   left: 0;
-  background-color: #ccc; /* Black*/
+  background-color: lightblue; /* Black*/
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 30px; /* Place content 60px from the top */
   padding-left: 2%;

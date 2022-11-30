@@ -15,7 +15,7 @@
       >
         <button
           v-if="reporting"
-          @click="submitReport"
+          @click="submitReport(freet._id)"
         >
           ✅ Submit Report
         </button>
@@ -169,12 +169,9 @@ export default {
     },
     stopReporting() {
       this.reporting = false;
-      this.draft = '';
+      this.draftReport = '';
     },
-    submitReport() {
-      /**
-       * Updates freet to have the submitted draft content.
-       */
+    submitReport(freetId) {
       if (!this.draftReport) {
         const error = 'Error: Must file a reason for the report.';
         this.$set(this.alerts, error, 'error'); // Set an alert to be the error text, timeout of 3000 ms
@@ -185,7 +182,7 @@ export default {
       const params = {
         method: 'POST',
         message: 'Successfully report this freet!',
-        body: JSON.stringify({content: this.draft}),
+        body: JSON.stringify({freetId: freetId, reasons: [this.draftReport]}),
         callback: () => {
           this.$set(this.alerts, params.message, 'success');
           setTimeout(() => this.$delete(this.alerts, params.message), 3000);
@@ -215,6 +212,36 @@ export default {
         }
 
         this.editing = false;
+        this.$store.commit('refreshFreets');
+
+        params.callback();
+      } catch (e) {
+        this.$set(this.alerts, e, 'error');
+        setTimeout(() => this.$delete(this.alerts, e), 3000);
+      }
+    },
+    async requestReport(params) {
+      /**
+       * Submits a request to the freet's endpoint
+       * @param params - Options for the request
+       * @param params.body - Body for the request, if it exists
+       * @param params.callback - Function to run if the the request succeeds
+       */
+      const options = {
+        method: params.method, headers: {'Content-Type': 'application/json'}
+      };
+      if (params.body) {
+        options.body = params.body;
+      }
+
+      try {
+        const r = await fetch(`/api/reports`, options);
+        if (!r.ok) {
+          const res = await r.json();
+          throw new Error(res.error);
+        }
+
+        this.reporting = false;
         this.$store.commit('refreshFreets');
 
         params.callback();

@@ -42,6 +42,7 @@
     </article>
     <button
       type="submit"
+      style="background-color: lightblue"
     >
       {{ title }}
     </button>
@@ -135,28 +136,34 @@ form {
   justify-content: space-between;
   margin-bottom: 14px;
   position: relative;
+  /* background-color: yellow; */
 }
 
 article > div {
   display: flex;
   flex-direction: column;
+  /* color: blue; */
 }
 
 form > article p {
   margin: 0;
+  /* color: green; */
 }
 
 form h3,
 form > * {
   margin: 0.3em 0;
+  /* background-color: lightblue; */
 }
 
 form h3 {
   margin-top: 0;
+  /* color: brown; */
 }
 
 textarea {
    font-family: inherit;
    font-size: inherit;
+   /* color: purple; */
 }
 </style>
