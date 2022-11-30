@@ -8,7 +8,7 @@ export default {
   mixins: [BlockForm],
   data() {
     return {
-      url: `/api/follows/follow/:${this.value}?`,
+      url: `/api/follows/follow`,
       method: 'PUT',
       hasBody: true,
       fields: [

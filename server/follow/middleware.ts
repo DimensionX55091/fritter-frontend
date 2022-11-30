@@ -10,12 +10,12 @@ const isNotFollowing = async (req: Request, res: Response, next: NextFunction) =
     const validFollowerFormat = Types.ObjectId.isValid(req.session.userId);
 
     const follower = validFollowerFormat ? await UserCollection.findOneByUserId(req.session.userId) : '';
-    const followed = await UserCollection.findOneByUsername(req.params.followedUsername);
+    const followed = await UserCollection.findOneByUsername(req.body.followedUsername);
 
     if (!follower) {
         res.status(404).json({
             error: {
-                UserNotFound: `User with ID ${req.params.followerId} does not exist.`
+                UserNotFound: `User with ID ${req.session.userId} does not exist.`
             }
         });
         return;
@@ -23,7 +23,7 @@ const isNotFollowing = async (req: Request, res: Response, next: NextFunction) =
     if (!followed) {
         res.status(404).json({
             error: {
-                UserNotFound: `User with username ${req.params.followedUsername} does not exist.`
+                UserNotFound: `User with username ${req.body.followedUsername} does not exist.`
             }
         });
         return;
@@ -32,7 +32,7 @@ const isNotFollowing = async (req: Request, res: Response, next: NextFunction) =
     if (follower.followings.includes(followed._id)) {
         res.status(400).json({
             error: {
-                AlreadyFollowing: `The user is already following the user ${req.params.followedUsername}`
+                AlreadyFollowing: `The user is already following the user ${req.body.followedUsername}`
             }
         });
         return;
@@ -48,12 +48,12 @@ const isNotSelf = async (req: Request, res: Response, next: NextFunction) => {
     const validFollowerFormat = Types.ObjectId.isValid(req.session.userId);
 
     const follower = validFollowerFormat ? await UserCollection.findOneByUserId(req.session.userId) : '';
-    const followed = await UserCollection.findOneByUsername(req.params.followedUsername);
+    const followed = await UserCollection.findOneByUsername(req.body.followedUsername);
 
     if (!follower) {
         res.status(404).json({
             error: {
-                UserNotFound: `User with ID ${req.params.followerId} does not exist.`
+                UserNotFound: `User with ID ${req.session.userId} does not exist.`
             }
         });
         return;
@@ -61,7 +61,7 @@ const isNotSelf = async (req: Request, res: Response, next: NextFunction) => {
     if (!followed) {
         res.status(404).json({
             error: {
-                UserNotFound: `User with username ${req.params.followedUsername} does not exist.`
+                UserNotFound: `User with username ${req.body.followedUsername} does not exist.`
             }
         });
         return;
@@ -85,12 +85,12 @@ const isFollowing = async (req: Request, res: Response, next: NextFunction) => {
     const validFollowerFormat = Types.ObjectId.isValid(req.session.userId);
 
     const follower = validFollowerFormat ? await UserCollection.findOneByUserId(req.session.userId) : '';
-    const followed = await UserCollection.findOneByUsername(req.params.followedUsername);
+    const followed = await UserCollection.findOneByUsername(req.body.followedUsername);
 
     if (!follower) {
         res.status(404).json({
             error: {
-                UserNotFound: `User with ID ${req.params.followerId} does not exist.`
+                UserNotFound: `User with ID ${req.session.userId} does not exist.`
             }
         });
         return;
@@ -98,7 +98,7 @@ const isFollowing = async (req: Request, res: Response, next: NextFunction) => {
     if (!followed) {
         res.status(404).json({
             error: {
-                UserNotFound: `User with username ${req.params.followedUsername} does not exist.`
+                UserNotFound: `User with username ${req.body.followedUsername} does not exist.`
             }
         });
         return;
@@ -107,7 +107,7 @@ const isFollowing = async (req: Request, res: Response, next: NextFunction) => {
     if (!follower.followings.includes(followed._id)) {
         res.status(400).json({
             error: {
-                NotFollowing: `The user is not following the user ${req.params.followedUsername}`
+                NotFollowing: `The user is not following the user ${req.body.followedUsername}`
             }
         });
         return;

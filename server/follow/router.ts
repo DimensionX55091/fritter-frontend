@@ -14,12 +14,10 @@ const router = express.Router();
  * 
  * @name PUT /api/follows/follow/:followedUsername?
  * 
- * @param {string} followerId - The ID of the follower
- * @param {string} followedUsername - The username of the user that the follower tries to follow
  * @return {FollowResponse} - The information about the follow
  */
 router.put(
-    '/follow/:followedUsername?',
+    '/follow',
     [
         userValidator.isUserLoggedIn,
         followValidator.isNotFollowing,

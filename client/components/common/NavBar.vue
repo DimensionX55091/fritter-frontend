@@ -27,17 +27,10 @@
         Login
       </router-link></h2>
     </div>
-    <!-- <div class="bottom">
-      <h2><a href = 'https://www.google.com/' 
-        v-if="$store.state.username"
-      >
-        Log Out
-      </a></h2>
-    </div> -->
     <div class="bottom">
       <h2><a href 
         v-if="$store.state.username"
-        v-on:click="this.$store.commit('logOut')"
+        @click="logOut"
       >
         Log Out
       </a></h2>
@@ -61,21 +54,26 @@ import BlockForm from '@/components/common/BlockForm.vue';
 export default {
   name: 'LogOut',
   mixins: [BlockForm],
-  data() {
-    return {
-      url: '/api/users/session',
-      method: 'DELETE',
-      setUsername: true,
-      title: 'Sign out',
-      fields: [],
-      callback: () => {
-        this.$router.push({name: 'Home'}); // Goes to Home page after signing out
-        // this.$store.commit('logOut');
+  methods: {
+    async logOut() {
+      try {
+        const r = await fetch('/api/users/session', {
+          method: 'DELETE',
+        });
+        if (!r.ok) {
+          const res = await r.json();
+          throw new Error(res.error);
+        }
+        this.$store.commit('setUsername', null);
+        this.$router.push({name: 'Login'});
         this.$store.commit('alert', {
           message: 'You are now signed out!', status: 'success'
         });
-      }
-    };
+      } catch (e) {
+        this.$set(this.alerts, e, 'error');
+        setTimeout(() => this.$delete(this.alerts, e), 3000);
+      }     
+    }
   }
 };
 </script>
