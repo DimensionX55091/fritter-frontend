@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
-// import UserCollection from '../server/user/collection';
+import UserCollection from '../server/user/collection';
 
 Vue.use(Vuex);
 
@@ -14,7 +14,7 @@ const store = new Vuex.Store({
     freets: [], // All freets created in the app
     username: null, // Username of the logged in user
     alerts: {}, // global success/error messages encountered during submissions to non-visible forms
-    // user: null
+    user: null
   },
   mutations: {
     alert(state, payload) {
@@ -32,7 +32,7 @@ const store = new Vuex.Store({
        * @param username - new username to set
        */
       state.username = username;
-      // state.user = UserCollection.findOneByUsername(username);
+      state.user = UserCollection.findOneByUsername(username);
     },
     updateFilter(state, filter) {
       /**
