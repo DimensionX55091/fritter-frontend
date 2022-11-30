@@ -46,7 +46,7 @@
       >
         <FreetComponent
           v-for="freet in $store.state.freets"
-          v-if="freet.authorId in $store.state.user.followings"
+
           :key="freet.id"
           :freet="freet"
         />
