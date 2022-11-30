@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
-import UserCollection from '../server/user/collection';
+// import UserCollection from '../server/user/collection';
 
 Vue.use(Vuex);
 
@@ -32,8 +32,11 @@ const store = new Vuex.Store({
        * @param username - new username to set
        */
       state.username = username;
-      state.user = UserCollection.findOneByUsername(username);
+      // state.user = UserCollection.findOneByUsername(username);
     },
+    // setUser(state, user){
+    //   state.user = user;
+    // },
     updateFilter(state, filter) {
       /**
        * Update the stored freets filter to the specified one.
