@@ -5,8 +5,8 @@
 <template>
   <nav>
     <div class="icon">
-      <img src="../../public/logo.svg">
       <h1 class="title">
+      <img src="../../public/logo.svg">
         Fritter
       </h1>
     </div>
