@@ -6,9 +6,15 @@
     class="freet"
   >
     <header>
-      <h3 class="author">
+      <div><h3 class="author">
         @{{ freet.author }}
-      </h3>
+        <span
+          v-if="freet.warning"
+          title="This freet may contain offensive content"
+        >
+          ❗
+        </span>
+      </h3></div>
       <div
         v-if="$store.state.username !== freet.author"
         class="actions"
