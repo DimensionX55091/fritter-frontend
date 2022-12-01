@@ -17,6 +17,7 @@ export default {
         {id: 'password', label: 'Password', value: '', hidden: false}
       ],
       title: 'Sign in',
+      buttonTitle: 'Sign in',
       callback: () => {
         this.$router.push({name: 'Home'});
         this.$store.commit('alert', {

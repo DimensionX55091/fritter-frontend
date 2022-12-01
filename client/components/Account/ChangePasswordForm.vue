@@ -15,6 +15,7 @@ export default {
         {id: 'password', label: 'Password', value: ''}
       ],
       title: 'Change password',
+      buttonTitle: 'Change password',
       callback: () => {
         const message = 'Successfully changed password!';
         this.$set(this.alerts, message, 'success');

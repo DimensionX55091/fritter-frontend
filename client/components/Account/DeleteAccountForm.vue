@@ -12,6 +12,7 @@ export default {
       method: 'DELETE',
       setUsername: true,
       title: 'Delete account',
+      buttonTitle: 'Delete account',
       fields: [],
       content: 'Deleting your account is permanent and irreversible. Proceed only if you understand these consequences.',
       callback: () => {

@@ -15,6 +15,7 @@ export default {
         {id: 'followedUsername', label: 'Username', value: '', hidden: false}
       ],
       title: 'Follow a user',
+      buttonTitle: 'Follow',
       callback: () => {
         const message = 'Successfully follow a user!';
         this.$set(this.alerts, message, 'success');

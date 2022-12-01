@@ -50,7 +50,7 @@
         font-size:20px;
       "
     >
-      {{ title }}
+      {{ buttonTitle }}
     </button>
     <section class="alerts">
       <article
