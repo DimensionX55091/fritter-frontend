@@ -22,7 +22,9 @@
         </h3>
       </article>
     </section>
-    <section>
+    <section
+      v-if="$store.state.username"
+    >
       <header>
         <div class="left">
           <h2>

@@ -19,6 +19,7 @@
           v-if="field.id === 'content'"
           :name="field.id"
           :value="field.value"
+          style="height:60px;"
           @input="field.value = $event.target.value"
         />
         <input
@@ -26,6 +27,7 @@
           :type="field.id === 'password' ? 'password' : 'text'"
           :name="field.id"
           :value="field.value"
+          style="height:40px;font-family: inherit;font-size: inherit;"
           @input="field.value = $event.target.value"
         >
         <!-- <input
@@ -42,7 +44,11 @@
     </article>
     <button
       type="submit"
-      style="background-color: rgb(228, 244, 249)"
+      style="
+        background-color: rgb(228, 244, 249);
+        height:40px;
+        font-size:20px;
+      "
     >
       {{ title }}
     </button>
